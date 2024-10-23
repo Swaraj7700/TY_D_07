@@ -1,0 +1,17 @@
+C:\Users\admin\Desktop\TY_D_07\AI_07\bin\Debug\AI_07.exe.config
+C:\Users\admin\Desktop\TY_D_07\AI_07\bin\Debug\AI_07.exe
+C:\Users\admin\Desktop\TY_D_07\AI_07\bin\Debug\AI_07.pdb
+C:\Users\admin\Desktop\TY_D_07\AI_07\obj\Debug\AI_07.csproj.AssemblyReference.cache
+C:\Users\admin\Desktop\TY_D_07\AI_07\obj\Debug\AI_07.Properties.Resources.resources
+C:\Users\admin\Desktop\TY_D_07\AI_07\obj\Debug\AI_07.csproj.GenerateResource.cache
+C:\Users\admin\Desktop\TY_D_07\AI_07\obj\Debug\AI_07.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\TY_D_07\AI_07\obj\Debug\AI_07.exe
+C:\Users\admin\Desktop\TY_D_07\AI_07\obj\Debug\AI_07.pdb
+C:\Users\admin\Desktop\TY_D_07\AI_07\obj\Debug\AI_07.Form1.resources
+C:\Users\swara\Downloads\AI lab\TY_D_07\AI_07\obj\Debug\AI_07.csproj.AssemblyReference.cache
+C:\Users\swara\Downloads\AI lab\TY_D_07\AI_07\obj\Debug\AI_07.Form1.resources
+C:\Users\swara\Downloads\AI lab\TY_D_07\AI_07\obj\Debug\AI_07.Properties.Resources.resources
+C:\Users\swara\Downloads\AI lab\TY_D_07\AI_07\obj\Debug\AI_07.csproj.GenerateResource.cache
+C:\Users\swara\Downloads\AI lab\TY_D_07\AI_07\obj\Debug\AI_07.csproj.CoreCompileInputs.cache
+C:\Users\swara\Downloads\AI lab\TY_D_07\AI_07\obj\Debug\AI_07.exe
+C:\Users\swara\Downloads\AI lab\TY_D_07\AI_07\obj\Debug\AI_07.pdb

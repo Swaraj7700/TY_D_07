@@ -1,0 +1,89 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\swara\\Downloads\\AI lab\\TY_D_07\\AI_07\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C19E0651-D4FF-48F5-A212-0AE34C543E6E}|AI_07.csproj|C:\\Users\\swara\\Downloads\\AI lab\\TY_D_07\\AI_07\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C19E0651-D4FF-48F5-A212-0AE34C543E6E}|AI_07.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C19E0651-D4FF-48F5-A212-0AE34C543E6E}|AI_07.csproj|c:\\users\\swara\\downloads\\ai lab\\ty_d_07\\ai_07\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C19E0651-D4FF-48F5-A212-0AE34C543E6E}|AI_07.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C19E0651-D4FF-48F5-A212-0AE34C543E6E}|AI_07.csproj|C:\\Users\\swara\\Downloads\\AI lab\\TY_D_07\\AI_07\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C19E0651-D4FF-48F5-A212-0AE34C543E6E}|AI_07.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C19E0651-D4FF-48F5-A212-0AE34C543E6E}|AI_07.csproj|C:\\Users\\swara\\Downloads\\AI lab\\TY_D_07\\AI_07\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C19E0651-D4FF-48F5-A212-0AE34C543E6E}|AI_07.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\swara\\Downloads\\AI lab\\TY_D_07\\AI_07\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\swara\\Downloads\\AI lab\\TY_D_07\\AI_07\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAwwA8AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-20T14:13:33.786Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\swara\\Downloads\\AI lab\\TY_D_07\\AI_07\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\swara\\Downloads\\AI lab\\TY_D_07\\AI_07\\Form1.Designer.cs",
+              "RelativeToolTip": "Form1.Designer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
+              "WhenOpened": "2024-10-20T14:13:33.811Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\swara\\Downloads\\AI lab\\TY_D_07\\AI_07\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\swara\\Downloads\\AI lab\\TY_D_07\\AI_07\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAI4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-20T14:13:33.966Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\swara\\Downloads\\AI lab\\TY_D_07\\AI_07\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\admin\\Desktop\\TY_D_07\\AI_07\\Form1.cs [Design]",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\admin\\Desktop\\TY_D_07\\AI_07\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2024-10-20T14:13:34.032Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
