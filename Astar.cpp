@@ -1,201 +1,115 @@
-#include <list>
-#include <algorithm>
 #include <iostream>
+#include <vector>
+#include <string>
+#include <map>
+#include <queue>
+#include <algorithm>
 
-class Point {
+using namespace std;
+
+class Vertex
+{
 public:
-    Point(int a = 0, int b = 0) : x(a), y(b) {}
-    
-    // Comparison operators for points
-    bool operator==(const Point& o) const { return o.x == x && o.y == y; }
-    bool operator!=(const Point& o) const { return !(*this == o); } // Added
-    Point operator+(const Point& o) const { return Point(x + o.x, y + o.y); }
-    
-    int x, y;
+    string id;
+    int estimate; // h(n): Heuristic estimate to target
+    vector<pair<Vertex *, int>> neighbors;
+
+    Vertex(string i, int h) : id(i), estimate(h) {}
 };
 
-class Map {
-public:
-    Map() {
-        // Initialize a sample map (0 = free space, 1 = obstacle)
-        char t[8][8] = {
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 1, 1, 0},
-            {0, 0, 1, 0, 0, 0, 1, 0},
-            {0, 0, 1, 0, 0, 0, 1, 0},
-            {0, 0, 1, 1, 1, 1, 1, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0}
-        };
-        width = height = 8;
-        std::copy(&t[0][0], &t[0][0] + 8*8, &grid[0][0]);
-    }
+vector<string> aStarSearch(Vertex *source, Vertex *target, map<Vertex *, int> &costs)
+{
+    // Min-heap where each element is a pair of (estimatedCost, vertex)
+    priority_queue<pair<int, Vertex *>, vector<pair<int, Vertex *>>, greater<pair<int, Vertex *>>> minHeap;
 
-    // Access the map
-    int operator()(int x, int y) const { return grid[x][y]; }
-    
-    char grid[8][8]; // The map grid
-    int width, height; // Dimensions of the map
-};
+    map<Vertex *, bool> visited;   // Track visited vertices
+    map<Vertex *, Vertex *> trace; // Track the path
 
-class Node {
-public:
-    Point pos, parent; // Current position and parent position
-    int cost; // Cost from start to this node
-    int dist; // Estimated distance to end
-    
-    bool operator==(const Node& o) const { return pos == o.pos; }
-    bool operator==(const Point& o) const { return pos == o; }
-    bool operator<(const Node& o) const { return (dist + cost) < (o.dist + o.cost); }
-};
+    costs[source] = 0; // g(n): Cost from source to source is 0
+    minHeap.push({source->estimate, source}); // Push the source vertex with heuristic h(source)
 
-class AStar {
-public:
-    AStar() {
-        // Define the possible movement directions (8 directions)
-        neighbours[0] = Point(-1, -1); neighbours[1] = Point(1, -1);
-        neighbours[2] = Point(-1, 1); neighbours[3] = Point(1, 1);
-        neighbours[4] = Point(0, -1); neighbours[5] = Point(-1, 0);
-        neighbours[6] = Point(0, 1); neighbours[7] = Point(1, 0);
-    }
+    while (!minHeap.empty())
+    {
+        Vertex *current = minHeap.top().second;
+        int currentEstimate = minHeap.top().first; // This cost is f(n) = g(n) + h(n)
+        minHeap.pop();
 
-    // Heuristic function: squared Euclidean distance
-    int calcDist(const Point& p) {
-        int x = end.x - p.x, y = end.y - p.y;
-        return (x * x + y * y);
-    }
-
-    // Check if the point is within map bounds
-    bool isValid(const Point& p) {
-        return (p.x >= 0 && p.y >= 0 && p.x < map.width && p.y < map.height);
-    }
-
-    // Check if the point exists in open or closed lists with a better cost
-    bool existPoint(const Point& p, int cost) {
-        auto it = std::find(closed.begin(), closed.end(), p);
-        if (it != closed.end()) {
-            if ((it->cost + it->dist) < cost) return true;
-            closed.erase(it);
+        // If we reach the target, reconstruct the path
+        if (current == target)
+        {
+            vector<string> path;
+            int totalCost = costs[current]; // g(target) value
+            while (current != source)
+            {
+                path.push_back(current->id);
+                current = trace[current];
+            }
+            path.push_back(source->id);
+            reverse(path.begin(), path.end());
+            cout << "Total Cost: " << totalCost << endl;
+            return path;
         }
-        
-        it = std::find(open.begin(), open.end(), p);
-        if (it != open.end()) {
-            if ((it->cost + it->dist) < cost) return true;
-            open.erase(it);
-        }
-        
-        return false;
-    }
 
-    // Fill the open list with valid neighboring nodes
-    bool fillOpen(Node& n) {
-        for (int x = 0; x < 8; x++) {
-            Point neighbour = n.pos + neighbours[x];
+        visited[current] = true;
 
-            // If we reached the end, we're done
-            if (neighbour == end) return true;
+        // Iterate through adjacent vertices
+        for (auto &connection : current->neighbors)
+        {
+            Vertex *adjVertex = connection.first;
+            int pathCost = connection.second;
 
-            if (isValid(neighbour) && map(neighbour.x, neighbour.y) != 1) {
-                int stepCost = 1 + (x >= 4); // Diagonal cost can be adjusted here
-                int newCost = stepCost + n.cost;
-                int dist = calcDist(neighbour);
+            int newCost = costs[current] + pathCost; // g(adjVertex) = g(current) + edge weight
 
-                // Check if the neighbour is already in the open or closed lists
-                if (!existPoint(neighbour, newCost + dist)) {
-                    Node newNode;
-                    newNode.cost = newCost; 
-                    newNode.dist = dist; 
-                    newNode.pos = neighbour; 
-                    newNode.parent = n.pos;
-                    open.push_back(newNode);
-                }
+            // If the vertex is unvisited or a shorter path is found
+            if (!visited[adjVertex] || newCost < costs[adjVertex])
+            {
+                trace[adjVertex] = current;
+                costs[adjVertex] = newCost; // Update g(adjVertex)
+
+                // f(n) = g(n) + h(n)
+                int estimatedCost = newCost + adjVertex->estimate;
+                minHeap.push({estimatedCost, adjVertex});
             }
         }
-        return false;
     }
 
-    // A* search algorithm
-    bool search(const Point& s, const Point& e, const Map& mp) {
-        Node startNode;
-        end = e; 
-        start = s; 
-        map = mp;
-
-        startNode.cost = 0; 
-        startNode.pos = s; 
-        startNode.parent = Point(); 
-        startNode.dist = calcDist(s);
-        
-        open.push_back(startNode);
-
-        while (!open.empty()) {
-            // Sort open list by cost + distance (A*)
-            open.sort();
-            Node current = open.front();
-            open.pop_front();
-            closed.push_back(current);
-
-            // Fill open with neighbors
-            if (fillOpen(current)) return true; // Found a path
-        }
-        return false; // No path found
-    }
-
-    // Construct the path from start to end
-    int path(std::list<Point>& path) {
-        path.push_front(end);
-        int cost = closed.back().cost + 1; // Path cost
-        path.push_front(closed.back().pos);
-        Point parent = closed.back().parent;
-
-        // Backtrack through parents to find the full path
-        for (auto it = closed.rbegin(); it != closed.rend(); ++it) {
-            if (it->pos == parent && it->pos != start) {
-                path.push_front(it->pos);
-                parent = it->parent;
-            }
-        }
-        path.push_front(start);
-        return cost;
-    }
-
-    Map map; // The map being used
-    Point end, start; // Start and end points
-    Point neighbours[8]; // Possible movement directions
-    std::list<Node> open, closed; // Open and closed lists for A*
-};
-
-int main() {
-    Map m; // Create the map
-    Point start(0, 0), end(7, 7); // Define start and end points
-    AStar as; // Create A* search instance
-
-    // Perform the A* search
-    if (as.search(start, end, m)) {
-        std::list<Point> path; // To store the resulting path
-        int cost = as.path(path); // Get the path
-        
-        // Output the map and path
-        for (int y = -1; y < 9; y++) {
-            for (int x = -1; x < 9; x++) {
-                if (x < 0 || y < 0 || x > 7 || y > 7 || m(x, y) == 1)
-                    std::cout << char(0xdb); // Obstacle
-                else if (std::find(path.begin(), path.end(), Point(x, y)) != path.end())
-                    std::cout << "x"; // Path
-                else
-                    std::cout << "."; // Free space
-            }
-            std::cout << "\n";
-        }
-
-        std::cout << "\nPath cost " << cost << ": ";
-        for (const auto& p : path) {
-            std::cout << "(" << p.x << ", " << p.y << ") "; // Print path points
-        }
-    }
-    std::cout << "\n\n";
-    return 0;
+    cout << "No path found" << endl;
+    return vector<string>();
 }
 
-    
+int main()
+{
+    // Create some vertices
+    Vertex *v1 = new Vertex("A", 4);
+    Vertex *v2 = new Vertex("B", 2);
+    Vertex *v3 = new Vertex("C", 0); // Target vertex
+    Vertex *v4 = new Vertex("D", 3);
+
+    // Set up adjacency lists (edges)
+    v1->neighbors = {{v2, 1}, {v4, 5}}; // A -> B (1), A -> D (5)
+    v2->neighbors = {{v3, 2}, {v1, 1}}; // B -> C (2), B -> A (1)
+    v3->neighbors = {};                 // Target vertex has no outgoing edges
+    v4->neighbors = {{v3, 2}};          // D -> C (2)
+
+    // Define the source and target
+    Vertex *source = v1; // Start at A
+    Vertex *target = v3; // Goal is C
+
+    map<Vertex *, int> costs;
+    cout << "Running A* Algorithm - " << endl;
+
+    // Execute A* Search
+    vector<string> resultPath = aStarSearch(source, target, costs);
+
+    // Print the resulting path
+    cout << "Path: ";
+    for (const auto &node : resultPath)
+    {
+        cout << node;
+        if (&node != &resultPath.back()) // Avoid printing "->" after the last vertex
+            cout << " -> ";
+    }
+    cout << endl;
+
+    return 0;
+}
